@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fachbibliothek – Hochschulzugang</title>
+
+  <!-- Externe Styles und Schriftarten -->
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Quicksand:wght@700&display=swap" rel="stylesheet">
+
+  <!-- JavaScript-Dateien -->
+  <script src="datenbank.js"></script>
+  <script defer src="hochschule.js"></script>
+</head>
+
+<body>
+  <!-- HEADER-BEREICH -->
+  <header>
+    <div class="header-inner">
+      <h1>Fachbibliothek</h1>
+      <p class="subline">Koordinierungsstelle Chancengleichheit Sachsen</p>
+    </div>
+  </header>
+
+  <!-- HAUPTINHALT -->
+  <main class="hochschule">
+    
+    <!-- Begrüßungstext -->
+    <section class="intro" aria-labelledby="welcome-heading">
+      <br>
+      <h2 id="welcome-heading">Willkommen!</h2>
+      <p>
+        In unserer digitalen Fachbibliothek können Sie gezielt nach wissenschaftlicher Literatur suchen und sich diese ausleihen.
+        Nutzen Sie das untenstehende Formular zur Recherche nach Autor, Titel, Medium oder Genre.
+      </p>
+    </section>
+
+    <!-- SUCHBEREICH -->
+    <section class="suchbereich">
+
+      <!-- Einfache Suche -->
+      <form id="simpleSearchForm" class="suchbox-form" role="search">
+        <div class="searchbar">
+          <input type="text" name="query" aria-label="Suche" />
+          <button type="submit" class="search-button" aria-label="Suche ausführen">🔍</button>
+        </div>
+      </form>
+
+      <!-- Button für erweiterte Suche -->
+      <div class="button-wrapper">
+        <button type="button" class="advanced-toggle" id="toggleAdvancedButton">
+          Erweiterte Suche
+        </button>
+      </div>
+
+      <!-- Erweiterte Suche (initial versteckt) -->
+      <div class="advanced-search" id="advancedSearch" hidden>
+        <form id="advancedForm" class="filter-form">
+          
+          <!-- Textfelder für Autor, Titel, ISBN, Verlag -->
+          <div class="form-col">
+            <label for="autor">Autor</label>
+            <input id="autor" type="text" name="autor" />
+          </div>
+
+          <div class="form-col">
+            <label for="titel">Titel</label>
+            <input id="titel" type="text" name="titel" />
+          </div>
+
+          <div class="form-col">
+            <label for="isbn">ISBN</label>
+            <input id="isbn" type="text" name="isbn" />
+          </div>
+
+          <div class="form-col">
+            <label for="verlag">Verlag</label>
+            <input id="verlag" type="text" name="verlag" />
+          </div>
+
+          <!-- Genre-Auswahl mit Checkboxen -->
+          <div class="form-row genre-row">
+            <label>Genre</label>
+            <div class="checkbox-group">
+              <label class="checkbox-item">
+                <input type="checkbox" name="genre" value="belletristik" />
+                <span>Belletristik</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="genre" value="jugend" />
+                <span>Kinder- und Jugendliteratur</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="genre" value="sachliteratur" />
+                <span>Sachliteratur</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Buttons zum Absenden oder Zurücksetzen -->
+          <div class="form-buttons">
+            <button type="submit">Suche starten</button>
+            <button type="reset" class="reset-button">Felder leeren</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Suchergebnisse -->
+    <section class="ergebnisse" id="ergebnisse" aria-live="polite">
+      <div id="ergebnisContainer"></div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      Fachbibliothek Chancengleichheit Sachsen |
+      <a href="#">Barrierefreiheit</a> |
+      <a href="#">Kontakt</a>
+    </p>
+  </footer>
+</body>
+</html>
+
+
+
+
+
+
+

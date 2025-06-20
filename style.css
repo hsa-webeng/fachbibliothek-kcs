@@ -1,0 +1,425 @@
+/* ========================== */
+/* ==== VARIABLES (ROOT) ==== */
+/* ========================== */
+:root {
+  --primary: #213A8F;
+  --accent: #f9a826;
+  --background: #ffffff;
+  --text: #000000;
+  --text-muted: #444444;
+  --card-shadow: rgba(0, 0, 0, 0.08);
+
+  --font-headline: 'Quicksand', sans-serif;
+  --font-body: 'Fira Sans', 'Fira Sans Condensed', system-ui, sans-serif;
+
+  --max-width: 960px;
+}
+
+/* ======================= */
+/* ==== GLOBAL RESET  ==== */
+/* ======================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =================== */
+/* ==== BODY STYLING ==== */
+/* =================== */
+body {
+  font-family: var(--font-body);
+  background-color: var(--background);
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ================== */
+/* ==== HEADER ====== */
+/* ================== */
+header {
+  background-color: var(--primary);
+  color: white;
+  padding: 2.5rem 1rem;
+  border-bottom: 4px solid var(--accent);
+  text-align: center;
+}
+
+header h1 {
+  font-family: var(--font-headline);
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.subline {
+  font-size: 1.5rem;
+  color: #e6e6e6;
+  margin-top: 0.5rem;
+}
+
+/* ========================= */
+/* ==== MAIN STRUCTURE ==== */
+/* ========================= */
+main.hochschule {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ================== */
+/* ==== INTRO TEXT === */
+/* ================== */
+.intro {
+  text-align: center;
+}
+
+.intro h2 {
+  font-family: var(--font-headline);
+  font-size: 1.8rem;
+  color: var(--primary);
+  text-align: left;
+  margin: 0 auto 0.5rem;
+}
+
+.intro p {
+  color: var(--text-muted);
+  text-align: left;
+  margin: 0 auto;
+}
+
+/* ===================== */
+/* ==== SUCHBOX ======== */
+/* ===================== */
+.suchbox-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.searchbar {
+  display: flex;
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  background: white;
+  overflow: hidden;
+}
+
+.searchbar input[type="text"] {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  font-size: 1.1rem;
+  border: none;
+}
+
+.search-button {
+  background-color: var(--primary);
+  color: white;
+  padding: 0 1.5rem;
+  font-size: 1.4rem;
+  border: none;
+  cursor: pointer;
+}
+
+.searchbar input[type="text"]:focus-visible,
+.searchbar .search-button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+/* ============================ */
+/* ==== ERWEITERTE SUCHE ===== */
+/* ============================ */
+.advanced-toggle {
+  font-size: 1rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  border: 2px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  transition: 0.2s ease;
+}
+
+.advanced-toggle:hover,
+.advanced-toggle:focus {
+  background-color: var(--primary);
+  color: white;
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.advanced-search {
+  background: #f9f9f9;
+  padding: 1.5rem 2rem;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin: 2rem auto 3rem;
+  max-width: 600px;
+}
+
+/* ========================= */
+/* ==== FORMULARE & FELDER */
+/* ========================= */
+.filter-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.form-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-col label {
+  font-weight: bold;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.form-col input[type="text"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--primary);
+  border-radius: 6px;
+  background: #fff;
+  color: #000;
+  transition: border-color 0.3s ease;
+}
+
+.form-col input[type="text"]:focus {
+  border-color: var(--accent);
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Einheitliche Schriftart für Labels und Buttons */
+  label,
+  button,
+  input[type="text"],
+  textarea {
+    font-family: var(--font-headline);
+  }
+
+
+/* ========================= */
+/* ==== GENRE CHECKBOXEN === */
+/* ========================= */
+.genre-row {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1 / -1;
+  color: var(--primary);
+  font-family: var(--font-headline);
+}
+
+.genre-row > label {
+  color: var(--primary);
+  font-family: var(--font-headline);
+  font-weight: bold;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.05rem;
+  cursor: pointer;
+  color: var(--primary);
+}
+
+.checkbox-item input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.4rem;
+  height: 1.4rem;
+  border: 2px solid var(--primary);
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  accent-color: var(--primary);
+}
+
+.checkbox-item input[type="checkbox"]:checked {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.checkbox-item input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 6px;
+  width: 5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-item input[type="checkbox"]:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+
+
+
+/* ====================== */
+/* ==== BUTTONS Unten === */
+/* ====================== */
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+button[type="submit"],
+.reset-button {
+  font-size: 1rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+}
+
+.reset-button {
+  background: white;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.reset-button:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* ======================== */
+/* ==== SUCHERGEBNISSE ==== */
+/* ======================== */
+.ergebnisse {
+  padding-top: 2rem;
+  margin: 0 auto;
+  max-width: var(--max-width);
+}
+
+.results-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* ==== EINZELNE RESULT CARD ==== */
+.result-card {
+  display: block;
+  padding: 1.25rem 1.5rem;
+  background: #ffffff;
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px var(--card-shadow);
+  color: var(--primary);
+  font-family: var(--font-headline);
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+  margin-bottom: 1.5rem;
+}
+
+.result-card:hover,
+.result-card:focus-visible {
+  transform: translateY(-2px);
+  text-decoration: underline;
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.result-card a,
+.result-card a:link,
+.result-card a:visited {
+  color: var(--primary) !important;
+  text-decoration: none;
+}
+
+.result-card a:hover,
+.result-card a:focus-visible {
+  text-decoration: underline;
+}
+
+/* ===================== */
+/* ==== FOOTER ======== */
+/* ===================== */
+footer {
+  background: #2f49af;
+  text-align: center;
+  padding: 1.25rem;
+  font-size: 0.9rem;
+  color: white;
+  border-top: 1px solid #ddd;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+  
+  
+  
+

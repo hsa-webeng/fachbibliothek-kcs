@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Queerdenken – Detailansicht</title>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="detail.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Quicksand:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <h1>Fachbibliothek</h1>
+      <p class="subline">Koordinierungsstelle Chancengleichheit Sachsen</p>
+    </div>
+  </header>
+
+  <!-- HAUPTINHALT -->
+  <main>
+    <div class="buch-container">
+      <h2 class="buch-title">Hey (Hg.) 2000 – Queerdenken</h2>
+
+      <!-- Tabs zur Navigation -->
+      <nav class="tab-nav" role="tablist">
+        <button class="tab-button active" id="tab-titel" role="tab" aria-selected="true" aria-controls="titel">Titel</button>
+        <button class="tab-button" id="tab-inhalt" role="tab" aria-selected="false" aria-controls="inhalt">Inhalt</button>
+      </nav>
+
+      <!-- Tab-Inhalt: Titel -->
+      <section id="titel" class="tab-content active" role="tabpanel" aria-labelledby="tab-titel">
+        <p><strong>Dokumententyp:</strong> Buch (Sammelwerk)</p>
+        <p><strong>Herausgeber:</strong> Hey, Barbara</p>
+        <p><strong>Titel:</strong> Que(e)rdenken</p>
+        <p><strong>Untertitel:</strong> Weibliche, männliche Homosexualität und Wissenschaft</p>
+        <p><strong>Jahr:</strong> 2000</p>
+        <p><strong>Verlagsort:</strong> Innsbruck</p>
+        <p><strong>Verlag:</strong> Studien-Verl.</p>
+        <p><strong>ISBN:</strong> 370651253X</p>
+        <p><strong>Seitenanzahl:</strong> 293</p>
+      </section>
+
+      <!-- Tab-Inhalt: Inhalt -->
+      <section id="inhalt" class="tab-content" role="tabpanel" aria-labelledby="tab-inhalt" hidden>
+        <p>Inhaltliche Beschreibung folgt. (Platzhalter)</p>
+      </section>
+
+      <!-- Zurück-Link -->
+      <div style="text-align: center;">
+        <a href="index.html" class="zurueck-button">← Zurück zur Suche</a>
+      </div>
+
+      <!-- Ausleihe-Button -->
+      <div style="text-align: center;">
+        <button id="openAusleiheModal" class="ausleihe-button">Ausleihe anfragen</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      &copy; 2025 Fachbibliothek Chancengleichheit Sachsen |
+      <a href="#">Barrierefreiheit</a> |
+      <a href="#">Kontakt</a>
+    </p>
+  </footer>
+
+  <!-- SCRIPT: Tabs & Modalsteuerung -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const buchAusgeliehen = false;
+
+      // === Tabs ===
+      const tabs = document.querySelectorAll('[role="tab"]');
+      const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+
+      function switchTab(newTab) {
+        const currentTab = document.querySelector('[role="tab"][aria-selected="true"]');
+        if (currentTab === newTab) return;
+
+        currentTab.setAttribute('aria-selected', 'false');
+        currentTab.classList.remove('active');
+        document.getElementById(currentTab.getAttribute('aria-controls')).hidden = true;
+
+        newTab.setAttribute('aria-selected', 'true');
+        newTab.classList.add('active');
+        document.getElementById(newTab.getAttribute('aria-controls')).hidden = false;
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener("click", () => switchTab(tab));
+        tab.addEventListener("keydown", e => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            switchTab(tab);
+          }
+        });
+      });
+
+      // Buch ist ausgeliehen? => Button deaktivieren
+      if (buchAusgeliehen) {
+        openBtn.disabled = true;
+        openBtn.textContent = "Derzeit nicht verfügbar";
+        openBtn.style.opacity = "0.6";
+        openBtn.style.cursor = "not-allowed";
+
+        const hinweis = document.createElement("div");
+        hinweis.className = "verfuegbarkeit-hinweis";
+        hinweis.setAttribute("role", "alert");
+        hinweis.setAttribute("aria-live", "assertive");
+        hinweis.textContent = "Dieses Buch ist momentan ausgeliehen und kann nicht vorgemerkt werden.";
+
+        openBtn.parentElement?.insertBefore(hinweis, openBtn);
+        return;
+      }
+    });
+  </script>
+</body>
+</html>
