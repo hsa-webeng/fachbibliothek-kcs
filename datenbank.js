@@ -1,4 +1,4 @@
-// datenbank.js
+/* datenbank.js
 const datenbank = [
     {
       id: "bade",                           
@@ -29,6 +29,6 @@ const datenbank = [
     }
   ];
   
-  
+  */
   
   
