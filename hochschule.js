@@ -16,9 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
       .map(
         buch => `
           <div class="result-card">
-          <a href="buch.html?id=${encodeURIComponent(buch.ENTRY_SHARED_ID)}" 
-            class="result-title">${buch.title} von  ${buch.author}</a>
-          </div> `
+            <a href="buch.html?id=${encodeURIComponent(buch.ENTRY_SHARED_ID)}" 
+              class="result-title">${buch.title} von ${buch.author}</a>
+          </div>`
       )
       .join("");
   }
@@ -44,8 +44,9 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(buecher => {
           zeigeErgebnisse(buecher);
         })
-        .catch(() => {
-          zeigeKeineTreffer("Fehler bei der Suche. Bitte versuchen Sie es später erneut.");
+        .catch(error => {
+          console.error('Fehler bei der Suche:', error);
+          zeigeKeineTreffer("Die Serverantwort ist ungültig");
         });
 
       input.value = "";
@@ -57,10 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
     advancedForm.addEventListener("submit", e => {
       e.preventDefault();
 
-      const author   = document.getElementById("autor").value.trim();
-      const title   = document.getElementById("titel").value.trim();
-      const isbn    = document.getElementById("isbn").value.trim();
-      const publisher  = document.getElementById("verlag").value.trim();
+      const author    = document.getElementById("autor").value.trim();
+      const title     = document.getElementById("titel").value.trim();
+      const isbn      = document.getElementById("isbn").value.trim();
+      const publisher = document.getElementById("verlag").value.trim();
       const keywords  = Array.from(
         document.querySelectorAll("input[name='genre']:checked")
       ).map(g => g.value);
@@ -83,7 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(buecher => {
           zeigeErgebnisse(buecher);
         })
-        .catch(() => {
+        .catch(error => {
+          console.error('Fehler bei der erweiterten Suche:', error);
           zeigeKeineTreffer("Fehler bei der Suche. Bitte versuchen Sie es später erneut.");
         });
     });

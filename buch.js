@@ -18,15 +18,18 @@ document.addEventListener("DOMContentLoaded", () => {
       // Überprüfe die Feldnamen per console.log(buch)
       console.log(buch);
 
+      // Definition-Liste
       container.innerHTML = `
         <h2>${buch.title ?? "-"}</h2>
-        <p><strong>Autor:</strong> ${buch.author ?? "-"}</p>
-        <p><strong>Beschreibung:</strong> ${buch.description ?? ""}</p>
-        <p><strong>Keywords:</strong> ${buch.keywords ?? ""}</p>
-        <p><strong>ISBN:</strong> ${buch.isbn ?? ""}</p>
-        <p><strong>Verlag:</strong> ${buch.publisher ?? ""}</p>
-        <p><strong>Jahr:</strong> ${buch.year ?? ""}</p>
-        <p><strong>Status:</strong> ${buch.status ?? ""}</p>
+        <dl>
+          <dt>Autor:</dt><dd> ${buch.author ?? "-"}</dd>
+          <dt>Beschreibung:</dt> <dd>${buch.description ?? ""}</dd>
+          <dt>Keywords:</dt> <dd>${buch.keywords ?? ""}</dd>
+          <dt>ISBN:</dt> <dd>${buch.isbn ?? ""}</dd>
+          <dt>Verlag:</dt> <dd>${buch.publisher ?? ""}</dd>
+          <dt>Jahr:</dt> <dd>${buch.year ?? ""}</dd>
+          <dt>Status:</dt> <dd>${buch.status ?? ""}</dd>
+        </dl>
         <button id="anfrageButton">Ausleihe anfragen</button>
         <form id="anfrageFormular" hidden>
           <label for="name">Name:</label>
