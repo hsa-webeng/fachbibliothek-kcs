@@ -18,16 +18,23 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `kcs_bibliothek`
---
+-- Aus der temporären Datenbank: `kcs_bibliothek`
+-- Der folgende SQL-Code ist für die Tabelle, die die Daten für die KCS Bücher erhält,
+-- und ist nur als Bespiel gedacht. 
 
+-- Die Daten müssen überarbeitet werden, es ist wichtig, dass die Datenbank in utf8mb4 ist, 
+-- damit die Sonderzeichen korrekt gespeichert werden.
+
+-- Logic für Titel, Autor und ID sollten angepasst werden, um eine saubare Datenbankstruktur zu gewährleisten.
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `flat_books`
---
 
+-- Falls die Tabelle `flat_books` bereits existiert, wird sie gelöscht und neu erstellt.
 DROP TABLE IF EXISTS `flat_books`;
+
+-- Erstellen der Tabelle `flat_books` mit den entsprechenden Spalten und Datentypen.
 CREATE TABLE `flat_books` (
   `ENTRY_SHARED_ID` int(11) NOT NULL,
   `publisher` text DEFAULT NULL,
@@ -57,7 +64,7 @@ CREATE TABLE `flat_books` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `flat_books`
+-- Einfügen von Daten in die Tabelle `flat_books`, muss angepasst werden, damit es dynamisch ist.
 --
 
 INSERT INTO `flat_books` (`ENTRY_SHARED_ID`, `publisher`, `year`, `address`, `editor`, `author`, `price`, `keywords`, `isbn`, `series`, `file`, `citationkey`, `doi`, `title`, `booktitle`, `type`, `abstract`, `edition`, `howpublished`, `journal`, `number`, `pages`, `school`, `url`, `volume`) VALUES
