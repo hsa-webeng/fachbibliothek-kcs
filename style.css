@@ -1,3 +1,54 @@
+.buch-container {
+  max-width: var(--max-width);
+  margin: 3rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-family: var(--font-body);
+}
+
+.buch-title {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.buch-container dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.75rem 1rem;
+  margin-bottom: 2rem;
+}
+
+.buch-container dt {
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.buch-container dd {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+#anfrageButton {
+  background-color: var(--primary);
+  color: white;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: background-color 0.2s ease;
+}
+
+#anfrageButton:hover {
+  background-color: var(--accent);
+}
+
 /* ========================== */
 /* ==== VARIABLES (ROOT) ==== */
 /* ========================== */

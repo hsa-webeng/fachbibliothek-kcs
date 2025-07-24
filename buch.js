@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Definition-Liste
       container.innerHTML = `
-        <h2>${buch.title ?? "-"}</h2>
+        <h2 "buch-title">${buch.title ?? "-"}</h2>
         <dl>
           <dt>Autor:</dt><dd> ${buch.author ?? "-"}</dd>
           <dt>Beschreibung:</dt> <dd>${buch.description ?? ""}</dd>
