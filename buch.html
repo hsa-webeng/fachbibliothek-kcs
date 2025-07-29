@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+  <!-- Zeichencodierung und responsive Skalierung -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Seitentitel im Browser-Tab -->
   <title>Buchdetail – Fachbibliothek</title>
+
+  <!-- Verlinkung zur externen CSS-Datei -->
   <link rel="stylesheet" href="detail.css" />
+
+  <!-- Einbindung von Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Quicksand:wght@700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <!-- Seitenkopf -->
+  <!-- Kopfbereich der Seite mit Titel und Unterzeile -->
   <header role="banner">
     <div class="header-inner">
       <h1>Fachbibliothek</h1>
@@ -17,14 +24,16 @@
     </div>
   </header>
 
-  <!-- Hauptinhalt -->
+  <!-- Hauptinhalt der Seite -->
   <main role="main">
     <div class="buch-container">
-      <!-- Seitentitel -->
+      
+      <!-- Dynamisch geladener Buchtitel -->
       <h2 id="buchtitel" class="buch-title" tabindex="-1">Buchtitel wird geladen...</h2>
 
-      <!-- Tabs: Navigation -->
+      <!-- Tab-Navigation zum Wechseln zwischen Informationen -->
       <div class="tab-nav" role="tablist" aria-label="Buchdetail-Reiter">
+        <!-- Tab: Titel -->
         <button
           id="tabTitel"
           role="tab"
@@ -35,6 +44,8 @@
         >
           Titel
         </button>
+
+        <!-- Tab: Inhalt -->
         <button
           id="tabInhalt"
           role="tab"
@@ -46,8 +57,10 @@
         </button>
       </div>
 
-      <!-- Tab-Panels -->
+      <!-- Inhalte der Tabs -->
       <div class="tab-content">
+        
+        <!-- Panel für "Titel"-Informationen -->
         <section
           id="panelTitel"
           role="tabpanel"
@@ -55,9 +68,11 @@
           aria-labelledby="tabTitel"
           aria-hidden="false"
         >
+          <!-- Container für dynamisch geladenen Buchinhalt -->
           <div id="buchContainer"></div>
         </section>
 
+        <!-- Panel für "Inhalt"-Beschreibung -->
         <section
           id="panelInhalt"
           role="tabpanel"
@@ -66,29 +81,33 @@
           hidden
           aria-hidden="true"
         >
+          <!-- Platzhaltertext für die Buchbeschreibung -->
           <p>Inhaltliche Beschreibung folgt. (Platzhalter)</p>
         </section>
       </div>
 
-      <!-- Buttons -->
+      <!-- Navigations- und Aktionsbuttons -->
       <div class="buch-buttons">
+        <!-- Zurück-Link zur vorherigen Seite -->
         <a href="index.html" class="zurueck-button">
           ← Zurück zur Suche
         </a>
+
+        <!-- Button zur Anforderung einer Ausleihe -->
         <button class="ausleihe-button">Ausleihe anfragen</button>
       </div>
     </div>
   </main>
 
-  <!-- Seitenfuß -->
+  <!-- Fußbereich der Seite mit Copyright -->
   <footer role="contentinfo">
     <p>&copy; 2025 Fachbibliothek Chancengleichheit Sachsen</p>
   </footer>
 
-  <!-- JavaScript -->
+  <!-- Einbindung des JavaScript-Codes zur Funktionalität -->
   <script src="buch.js"></script>
 
-  <!-- Utility: screenreader-only -->
+  <!-- Utility-Klasse für Inhalte, die nur für Screenreader sichtbar sind -->
   <style>
     .visually-hidden {
       position: absolute;

@@ -1,39 +1,45 @@
+// Wartet, bis das DOM vollständig geladen ist
 document.addEventListener("DOMContentLoaded", () => {
-  // Parameter aus der URL holen
+
+  // -------------------------------------------
+  // URL-Parameter auslesen (z. B. ?id=123)
+  // -------------------------------------------
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
 
-  // Referenzen auf DOM-Elemente
+  // DOM-Elemente vorbereiten
   const container = document.getElementById("buchContainer");
   const titelElement = document.getElementById("buchtitel");
   const tabTitel = document.getElementById("tabTitel");
   const tabInhalt = document.getElementById("tabInhalt");
 
-  // Keine ID? Frühzeitiger Abbruch
+  // Falls keine Buch-ID vorhanden ist: Fehlermeldung anzeigen
   if (!id) {
     container.innerHTML = "<p>Buch-ID fehlt.</p>";
     return;
   }
 
-  // Buchdaten vom Server abrufen
+  // -------------------------------------------
+  // Buchdaten vom Server laden
+  // -------------------------------------------
   fetch(`buch.php?id=${encodeURIComponent(id)}`)
     .then(res => res.json())
     .then(buch => {
 
-      // Fehler vom Server
+      // Fehlerbehandlung vom Server
       if (buch.error) {
         container.innerHTML = `<p>${buch.error}</p>`;
         return;
       }
 
-      // Titel setzen (Fallback wenn nicht vorhanden)
+      // Buchtitel in der Überschrift setzen (mit Fallback)
       titelElement.textContent = buch.title ?? "Titel unbekannt";
 
       /**
-       * Funktion: Keywords als Badges darstellen
-       * - Entfernt LaTeX-Reste
+       * KEYWORDS ALS BADGES DARSTELLEN
+       * - Bereinigt LaTeX-Kommandos
        * - Trennt nach , ; :
-       * - Baut einzelne <span>-Badges
+       * - Gibt einzelne <span>-Elemente zurück
        */
       function renderKeywordsBadges(keywordString) {
         const wrapper = document.createElement("div");
@@ -41,16 +47,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!keywordString) return wrapper;
 
-        // 1. Bereinigen
+        // Schritt 1: LaTeX entfernen
         let cleaned = keywordString
-          .replace(/\\[{}]/g, "")                    // z. B. \{ \}
-          .replace(/[{}]/g, "")                      // geschweifte Klammern
-          .replace(/\\text\w+\{.*?\}/g, "");         // LaTeX-Kommandos
+          .replace(/\\[{}]/g, "")                     // z. B. \{ oder \}
+          .replace(/[{}]/g, "")                       // geschweifte Klammern
+          .replace(/\\text\w+\{.*?\}/g, "");          // LaTeX-Kommandos wie \textbf{}
 
-        // 2. Split nach ; , oder :
+        // Schritt 2: Aufteilen in einzelne Begriffe
         const parts = cleaned.split(/;|,|:/);
 
-        // 3. Filter & rendern
+        // Schritt 3: Trimmen, Filtern, Badge erzeugen
         parts.map(k => k.trim())
              .filter(k => k.length > 1)
              .forEach(kw => {
@@ -64,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       /**
-       * Funktion: Tab "Bibliografische Angaben"
+       * ANZEIGE: Bibliografische Angaben (Tab 1)
        */
       function renderTitel() {
         container.innerHTML = `
@@ -80,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </dl>
         `;
 
-        // Keywords einfügen
+        // Keywords dynamisch einfügen
         if (buch.keywords) {
           const keywordWrapper = renderKeywordsBadges(buch.keywords);
           const keywordOutput = document.getElementById("keywordOutput");
@@ -89,14 +95,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       /**
-       * Funktion: Platzhalter für inhaltliche Beschreibung
+       * ANZEIGE: Platzhalter für Inhalt (Tab 2)
        */
       function renderInhalt() {
         container.innerHTML = `<p>Inhaltliche Beschreibung folgt. (Platzhalter)</p>`;
       }
 
       /**
-       * Funktion: Tabs visuell aktiv setzen (und für Screenreader)
+       * Tabs umschalten (visuell & ARIA)
+       * - Setzt aktiven Tab optisch und für Screenreader
        */
       function activateTab(activeButton) {
         [tabTitel, tabInhalt].forEach(btn => {
@@ -108,14 +115,18 @@ document.addEventListener("DOMContentLoaded", () => {
         activeButton.classList.add("active");
         activeButton.setAttribute("aria-selected", "true");
         activeButton.setAttribute("tabindex", "0");
-        activeButton.focus(); // optional für Tastatur-Fokus
+        activeButton.focus(); // für Tastatur-Navigation
       }
 
-      // Initialer Tab anzeigen
+      // -------------------------------------------
+      // Initial: Titel-Tab anzeigen
+      // -------------------------------------------
       renderTitel();
       activateTab(tabTitel);
 
+      // -------------------------------------------
       // Event-Listener für Tab-Wechsel
+      // -------------------------------------------
       tabTitel.addEventListener("click", () => {
         activateTab(tabTitel);
         renderTitel();
@@ -127,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 });
+
 
      
 

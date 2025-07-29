@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+  <!-- Grundlegende Metadaten -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Seitentitel -->
   <title>Fachbibliothek</title>
+
+  <!-- Verknüpfung mit externer CSS-Datei -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- JavaScript wird nach dem Parsen ausgeführt -->
   <script defer src="hochschule.js"></script>
+
+  <!-- Einbindung von Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Quicksand:wght@700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <!-- Seitenkopf -->
+  <!-- Seitenkopf mit Titel und Unterzeile -->
   <header role="banner">
     <div class="header-inner">
       <h1>Fachbibliothek</h1>
@@ -18,8 +27,10 @@
     </div>
   </header>
 
-  <!-- Hauptinhalt -->
+  <!-- Hauptbereich der Seite -->
   <main class="hochschule" role="main">
+
+    <!-- Einleitungstext -->
     <section class="intro" aria-labelledby="welcome-heading">
       <h2 id="welcome-heading">Willkommen!</h2>
       <p>
@@ -28,7 +39,7 @@
       </p>
     </section>
 
-    <!-- Suchbereich -->
+    <!-- Suchbereich: einfache + erweiterte Suche -->
     <section class="suchbox" aria-labelledby="search-heading">
       <h2 id="search-heading" class="visually-hidden">Katalogsuche</h2>
 
@@ -39,10 +50,12 @@
         role="search"
         aria-describedby="search-desc"
       >
+        <!-- Beschreibung für Screenreader -->
         <p id="search-desc" class="visually-hidden">
           Suche nach Autor, Titel oder ISBN.
         </p>
 
+        <!-- Suchleiste mit Eingabe und Button -->
         <div class="searchbar">
           <label for="query" class="visually-hidden">Suchbegriff eingeben</label>
           <input
@@ -62,7 +75,7 @@
           </button>
         </div>
 
-        <!-- Umschalter zur erweiterten Suche -->
+        <!-- Button zum Umschalten auf erweiterte Suche -->
         <div class="button-wrapper">
           <button
             type="button"
@@ -76,7 +89,7 @@
         </div>
       </form>
 
-      <!-- Erweiterte Suche -->
+      <!-- Erweiterte Suche (standardmäßig ausgeblendet) -->
       <section
         id="advancedSearch"
         class="advanced-search"
@@ -86,6 +99,8 @@
         <h3 id="advanced-search-heading" class="visually-hidden">Erweiterte Suche</h3>
 
         <form id="advancedForm" class="filter-form">
+
+          <!-- Filter: Autor und Titel -->
           <fieldset class="form-row">
             <legend>Autor und Titel</legend>
             <div class="form-col">
@@ -98,6 +113,7 @@
             </div>
           </fieldset>
 
+          <!-- Filter: ISBN und Verlag -->
           <fieldset class="form-row">
             <legend>ISBN und Verlag</legend>
             <div class="form-col">
@@ -110,6 +126,7 @@
             </div>
           </fieldset>
 
+          <!-- Filter: Genre-Auswahl per Checkbox -->
           <fieldset class="form-row genre-row">
             <legend>Genre auswählen</legend>
             <div class="checkbox-group">
@@ -128,6 +145,7 @@
             </div>
           </fieldset>
 
+          <!-- Buttons: Suche auslösen oder Formular zurücksetzen -->
           <div class="form-buttons">
             <button type="submit">Suche starten</button>
             <button type="reset" class="reset-button">Felder leeren</button>
@@ -136,7 +154,7 @@
       </section>
     </section>
 
-    <!-- Suchergebnisse -->
+    <!-- Suchergebnisliste (wird per JavaScript befüllt) -->
     <section
       class="ergebnisse"
       id="ergebnisse"
@@ -149,12 +167,12 @@
     </section>
   </main>
 
-  <!-- Seitenfuß -->
+  <!-- Seitenfuß mit Copyright -->
   <footer role="contentinfo">
     <p>&copy; 2025 Fachbibliothek Chancengleichheit Sachsen</p>
   </footer>
 
-  <!-- Utility-Klasse für Screenreader -->
+  <!-- Utility-Klasse: Nur für Screenreader sichtbar -->
   <style>
     .visually-hidden {
       position: absolute;
@@ -170,6 +188,7 @@
   </style>
 </body>
 </html>
+
 
 
 

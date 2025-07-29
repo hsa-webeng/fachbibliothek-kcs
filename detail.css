@@ -1,20 +1,21 @@
 /* ======================================== */
 /* ============ VARIABLEN ================ */
 /* ======================================== */
+/* Globale Design- und Schriftvariablen */
 :root {
-  --primary: #1e3a8a;
-  --accent: #eab308;
+  --primary: #1e3a8a;                 /* Hauptfarbe (dunkelblau) */
+  --accent: #eab308;                  /* Akzentfarbe (gelb) */
   --font-headline: 'Quicksand', sans-serif;
   --font-body: 'Fira Sans', sans-serif;
-  --text: #111;
-  --background: #fff;
+  --text: #111;                       /* Textfarbe */
+  --background: #fff;                 /* Seitenhintergrund */
 }
 
 
 /* ======================================== */
 /* =========== BASISSTYLES =============== */
 /* ======================================== */
-
+/* Grundlegendes Styling für den Body */
 body {
   font-family: var(--font-body);
   background-color: var(--background);
@@ -28,7 +29,7 @@ body {
 /* ======================================== */
 /* ========== HEADER & FOOTER ============ */
 /* ======================================== */
-
+/* Seitenkopf */
 header {
   background: var(--primary);
   color: white;
@@ -47,6 +48,7 @@ header h1 {
   font-size: 1.1rem;
 }
 
+/* Seitenfuß */
 footer {
   background: var(--primary);
   color: white;
@@ -65,7 +67,7 @@ footer a {
 /* ======================================== */
 /* ======= BUCHDETAIL-CONTAINER ========== */
 /* ======================================== */
-
+/* Layout für den Container der Buchdetails */
 .buch-container {
   max-width: 960px;
   margin: 4.5rem auto;
@@ -79,7 +81,7 @@ footer a {
 /* ======================================== */
 /* ================ TABS ================= */
 /* ======================================== */
-
+/* Navigation für Tabs */
 .tab-nav {
   display: flex;
   justify-content: center;
@@ -88,6 +90,7 @@ footer a {
   flex-wrap: wrap;
 }
 
+/* Styling für Tab-Buttons */
 .tab-nav button {
   padding: 0.6rem 2rem;
   font-size: 1.1rem;
@@ -100,6 +103,7 @@ footer a {
   transition: background 0.3s ease, transform 0.15s ease;
 }
 
+/* Aktiver und Hover-Zustand */
 .tab-nav button.active,
 .tab-nav button:hover {
   background: var(--primary);
@@ -111,7 +115,7 @@ footer a {
 /* ======================================== */
 /* ====== TASTATUR-FOKUS-STYLING ========= */
 /* ======================================== */
-
+/* Fokusmarkierungen für bessere Zugänglichkeit */
 .tab-nav button:focus,
 .zurueck-button:focus,
 .ausleihe-button:focus,
@@ -125,7 +129,7 @@ footer a {
 /* ======================================== */
 /* ============= BUCHINFOS =============== */
 /* ======================================== */
-
+/* Titel des Buches */
 .buch-title {
   font-family: var(--font-headline);
   font-size: 1.6rem;
@@ -134,6 +138,7 @@ footer a {
   text-align: center;
 }
 
+/* Abschnittsüberschrift */
 .buch-section-title {
   text-align: center;
   font-size: 1.2rem;
@@ -143,6 +148,7 @@ footer a {
   font-family: var(--font-headline);
 }
 
+/* Beschreibungsliste für Buchinfos */
 .buch-infos {
   display: grid;
   row-gap: 1rem;
@@ -154,6 +160,7 @@ footer a {
   padding-top: 1.5rem;
 }
 
+/* Einzelne Zeilen innerhalb der DL-Struktur */
 .buch-infos div {
   display: contents;
 }
@@ -168,6 +175,7 @@ footer a {
   color: #444;
 }
 
+/* Alternative Darstellung für starke Texte innerhalb von P */
 .buch-infos p strong {
   display: inline-block;
   min-width: 140px;
@@ -177,8 +185,7 @@ footer a {
 /* ======================================== */
 /* ============== BUTTONS ================ */
 /* ======================================== */
-
-/* -- Container für beide Buttons */
+/* Button-Container */
 .buch-buttons {
   display: flex;
   justify-content: center;
@@ -187,7 +194,7 @@ footer a {
   margin-top: 2rem;
 }
 
-/* Zurück-Button */
+/* Zurück-Link */
 .zurueck-button {
   background: transparent;
   border: 2px solid var(--primary);
@@ -207,7 +214,7 @@ footer a {
   color: white;
 }
 
-/* Ausleihe-Button */
+/* Button zur Ausleiheanfrage */
 .ausleihe-button {
   background-color: var(--primary);
   color: white;
@@ -224,7 +231,7 @@ footer a {
 /* ======================================== */
 /* =============== MODAL ================= */
 /* ======================================== */
-
+/* Grundstruktur für Modal-Overlay */
 .modal {
   display: none;
   position: fixed;
@@ -235,10 +242,12 @@ footer a {
   z-index: 2000;
 }
 
+/* Sichtbares Modal */
 .modal.show {
   display: flex;
 }
 
+/* Inhalt des Modals */
 .modal-content {
   background: white;
   border-radius: 12px;
@@ -284,8 +293,7 @@ footer a {
   cursor: pointer;
 }
 
-
-/* === Schließen-Button im Modal === */
+/* Schließen-Button oben rechts */
 .close-button {
   position: absolute;
   top: 1rem;
@@ -301,7 +309,7 @@ footer a {
 /* ======================================== */
 /* ========== MODAL-ANIMATIONEN ========== */
 /* ======================================== */
-
+/* Einblendeffekt für Modal */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -317,13 +325,14 @@ footer a {
 /* ======================================== */
 /* ============ KEYWORDS-BADGES ========== */
 /* ======================================== */
-
+/* Wrapper für Keywords */
 #keywordOutput {
   display: flex !important;
   flex-wrap: wrap;
   gap: 0.25rem;
 }
 
+/* Einzelne Schlagwörter als Badges */
 .keyword-badge {
   background-color: #eef1fa;
   color: #1a3087;
@@ -336,6 +345,7 @@ footer a {
   line-height: 1.2;
   margin: 0.1rem;
 }
+
 
   
   
