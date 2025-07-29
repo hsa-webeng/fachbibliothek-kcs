@@ -1,50 +1,62 @@
+
 document.addEventListener("DOMContentLoaded", () => {
-  // Element-Referenzen
+
+  // ==============================
+  // === ELEMENT‑REFERENZEN =======
+  // ==============================
+
   const toggleBtn    = document.getElementById("toggleAdvancedButton");
   const advanced     = document.getElementById("advancedSearch");
   const simpleForm   = document.getElementById("simpleSearchForm");
   const advancedForm = document.getElementById("advancedForm");
   const ergebnisse   = document.getElementById("ergebnisContainer");
 
-  // Hilfsfunktionen
+
+  // ==============================
+  // === SUCHERGEBNISSE RENDER ===
+  // ==============================
+
+  // Ergebnisliste anzeigen
   function zeigeErgebnisse(buecher) {
     if (!buecher || buecher.length === 0) {
-      zeigeKeineTreffer("Keine Treffer gefunden.");
-      return;
+      return zeigeKeineTreffer("Keine Treffer gefunden.");
     }
 
-    console.log("Das Buch wurde gefunden:");
-    buecher.forEach(b => {
-    console.log("📖 Titel:", b.title, "| Autor:", b.author, "| ID", b.ENTRY_SHARED_ID)
-    });
+    ergebnisse.innerHTML = buecher.map(buch => {
+      const id     = buch.ENTRY_SHARED_ID ?? "";
+      const title  = buch.title  ?? "Unbekannter Titel";
+      const author = buch.author ?? "Unbekannter Autor";
 
-    ergebnisse.innerHTML = buecher
-      .map(buch => {
-        const id     = buch.ENTRY_SHARED_ID ?? "";
-        const title  = buch.title ?? "Unbekannter Titel";
-        const author = buch.author ?? "Unbekannter Autor";
+      if (!id) {
+        console.warn("⚠️ Buch ohne ID:", buch);
+        return `<div class="result-card">⚠️ Buch ohne gültige ID</div>`;
+      }
 
-        if (!id) {
-          console.warn("⚠️ WARNUNG: Buch ohne ID:", buch);
-          return `<div class="result-card">⚠️ Buch ohne gültige ID</div>`;
-        }
-
-        return `
-          <div class="result-card">
-            <a href="buch.html?id=${encodeURIComponent(id)}" class="result-title">
-              <strong>${title}</strong>${buch.author ? " von " + author : ""}
-            </a>
-          </div>`;
-      })
-      .join("");
+      return `
+        <div class="result-card">
+          <a href="buch.html?id=${encodeURIComponent(id)}" class="result-title">
+            <strong>${title}</strong>
+            ${buch.author 
+              ? `<span class="author">von ${author}</span>` 
+              : ""
+            }
+          </a>
+        </div>
+      `;
+    }).join("");
   }
 
+  // Hinweis anzeigen, wenn keine Treffer gefunden wurden
   function zeigeKeineTreffer(txt = "Keine passenden Ergebnisse gefunden.") {
     ergebnisse.innerHTML = `<p>${txt}</p>`;
   }
 
-  // 🔍 JSON oder Textprüfung
-  function fetchUndPrüfen(url, callback) {
+
+  // ====================================
+  // === FETCH + JSON FEHLERBEHANDLUNG ==
+  // ====================================
+
+  function fetchUndPruefen(url, callback) {
     fetch(url)
       .then(res => res.text())
       .then(text => {
@@ -52,17 +64,21 @@ document.addEventListener("DOMContentLoaded", () => {
           const json = JSON.parse(text);
           callback(json);
         } catch (err) {
-          console.error("❌ Fehler beim Parsen der Antwort:", err, text);
-          zeigeKeineTreffer("Unerwartete Serverantwort. Bitte prüfe die Server-Konsole.");
+          console.error("❌ Parsing-Fehler:", err, text);
+          zeigeKeineTreffer("Unerwartete Serverantwort. Siehe Konsole.");
         }
       })
       .catch(err => {
-        console.error("❌ Netzfehler oder Server nicht erreichbar:", err);
+        console.error("❌ Netzfehler:", err);
         zeigeKeineTreffer("Serverfehler. Bitte später erneut versuchen.");
       });
   }
 
-  // Einfache Suche
+
+  // ============================
+  // === EINFACHE SUCHE LOGIK ===
+  // ============================
+
   if (simpleForm) {
     simpleForm.addEventListener("submit", e => {
       e.preventDefault();
@@ -70,19 +86,22 @@ document.addEventListener("DOMContentLoaded", () => {
       const q     = input.value.trim();
 
       if (!q) {
-        zeigeKeineTreffer("Bitte geben Sie einen Suchbegriff ein.");
-        return;
+        return zeigeKeineTreffer("Bitte geben Sie einen Suchbegriff ein.");
       }
 
       const url = `search.php?query=${encodeURIComponent(q)}`;
-      console.log("🔍 Sende einfache Suchanfrage:", url);
-      fetchUndPrüfen(url, zeigeErgebnisse);
+      console.log("🔍 Einfache Suche:", url);
+      fetchUndPruefen(url, zeigeErgebnisse);
 
-      input.value = "";
+      // Hinweis: input wird nicht geleert
     });
   }
 
-  // Erweiterte Suche
+
+  // ==============================
+  // === ERWEITERTE SUCHE LOGIK ===
+  // ==============================
+
   if (advancedForm) {
     advancedForm.addEventListener("submit", e => {
       e.preventDefault();
@@ -90,51 +109,61 @@ document.addEventListener("DOMContentLoaded", () => {
       const title     = document.getElementById("titel").value.trim();
       const isbn      = document.getElementById("isbn").value.trim();
       const publisher = document.getElementById("verlag").value.trim();
-      const keywords  = Array.from(document.querySelectorAll("input[name='genre']:checked"))
-                            .map(g => g.value);
+      const genres    = Array.from(
+        document.querySelectorAll("input[name='genre']:checked")
+      ).map(el => el.value);
 
-      if (!author && !title && !isbn && !publisher && keywords.length === 0) {
-        zeigeKeineTreffer("Bitte geben Sie mindestens ein Suchkriterium ein.");
-        return;
+      // Wenn nichts ausgefüllt ist → Hinweis
+      if (!author && !title && !isbn && !publisher && genres.length === 0) {
+        return zeigeKeineTreffer("Bitte mindestens ein Kriterium angeben.");
       }
 
+      // Parameter zusammenbauen
       const params = new URLSearchParams();
       if (author)    params.append("author", author);
       if (title)     params.append("title", title);
       if (isbn)      params.append("isbn", isbn);
       if (publisher) params.append("publisher", publisher);
-      keywords.forEach(g => params.append("genre[]", g));
+      genres.forEach(g => params.append("genre[]", g));
 
       const url = `search.php?${params.toString()}`;
-      console.log("🔍 Sende erweiterte Suchanfrage:", url);
-      fetchUndPrüfen(url, zeigeErgebnisse);
+      console.log("🔍 Erweiterte Suche:", url);
+      fetchUndPruefen(url, zeigeErgebnisse);
     });
   }
 
-  // Toggle für "Erweiterte Suche"
+
+  // ==================================
+  // === TOGGLE "ERWEITERTE SUCHE" ====
+  // ==================================
+
   if (toggleBtn && advanced) {
     toggleBtn.addEventListener("click", () => {
-      const hidden = advanced.hasAttribute("hidden");
+      const showing = !advanced.hasAttribute("hidden");
       advanced.toggleAttribute("hidden");
-      toggleBtn.textContent = hidden ? "Einfache Suche" : "Erweiterte Suche";
+      toggleBtn.textContent = showing ? "Erweiterte Suche" : "Einfache Suche";
     });
   }
 
-  // Reset-Hinweis
+
+  // =====================================
+  // === RESET-HANDLING FÜR FORMS ========
+  // =====================================
+
   document.querySelectorAll("form").forEach(form => {
     form.addEventListener("reset", () => {
+      // Timeout, um Werte nach Reset zu prüfen
       setTimeout(() => {
-        const autor   = document.getElementById("autor")?.value.trim();
-        const titel   = document.getElementById("titel")?.value.trim();
-        const isbn    = document.getElementById("isbn")?.value.trim();
-        const verlag  = document.getElementById("verlag")?.value.trim();
-        const genres  = document.querySelectorAll("input[name='genre']:checked");
-        const query   = document.querySelector('input[name="query"]')?.value.trim();
+        const query = document.querySelector('input[name="query"]')?.value.trim();
+        const filledAdvanced = Array.from(
+          document.querySelectorAll("#advancedSearch input")
+        ).some(i => i.value.trim() || i.checked);
 
-        if (!autor && !titel && !isbn && !verlag && genres.length === 0 && !query) {
-          zeigeKeineTreffer("Bitte starten Sie eine Suche, um Ergebnisse zu sehen.");
+        if (!query && !filledAdvanced) {
+          zeigeKeineTreffer("Bitte eine Suche starten, um Ergebnisse zu sehen.");
         }
       }, 0);
     });
   });
+
 });

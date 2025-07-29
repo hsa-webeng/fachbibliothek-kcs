@@ -1,34 +1,106 @@
 <!DOCTYPE html>
 <html lang="de">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Buchdetail – Fachbibliothek</title>
-        <link rel="stylesheet" href="style.css" />
-        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Quicksand:wght@700&display=swap" rel="stylesheet">
-    </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buchdetail – Fachbibliothek</title>
+  <link rel="stylesheet" href="detail.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Quicksand:wght@700&display=swap" rel="stylesheet">
+</head>
 
-    <body>
-        <header>
-            <div class="header-inner">
-                <h1>Fachbibliothek</h1>
-                <p class="subline">Koodinierungsstelle Chancengleichheit Sachsen</p>
-            </div>
-        </header>
+<body>
+  <!-- Seitenkopf -->
+  <header role="banner">
+    <div class="header-inner">
+      <h1>Fachbibliothek</h1>
+      <p class="subline">Koordinierungsstelle Chancengleichheit Sachsen</p>
+    </div>
+  </header>
 
-        <main>
-            <div class="buch-container" id="buchContainer">
+  <!-- Hauptinhalt -->
+  <main role="main">
+    <div class="buch-container">
+      <!-- Seitentitel -->
+      <h2 id="buchtitel" class="buch-title" tabindex="-1">Buchtitel wird geladen...</h2>
 
-            </div>
-        </main>
-        <footer>
-            <p>&copy; 2025 Fachbibliothek Chancengleichheit Sachsen |
-                <a href="#">Barrierefreiheit</a> |
-                <a href="#">Kontakt</a>
-            </p>
-        </footer>
+      <!-- Tabs: Navigation -->
+      <div class="tab-nav" role="tablist" aria-label="Buchdetail-Reiter">
+        <button
+          id="tabTitel"
+          role="tab"
+          aria-controls="panelTitel"
+          aria-selected="true"
+          tabindex="0"
+          class="active"
+        >
+          Titel
+        </button>
+        <button
+          id="tabInhalt"
+          role="tab"
+          aria-controls="panelInhalt"
+          aria-selected="false"
+          tabindex="-1"
+        >
+          Inhalt
+        </button>
+      </div>
 
-        <script src="buch.js"></script>
+      <!-- Tab-Panels -->
+      <div class="tab-content">
+        <section
+          id="panelTitel"
+          role="tabpanel"
+          tabindex="0"
+          aria-labelledby="tabTitel"
+          aria-hidden="false"
+        >
+          <div id="buchContainer"></div>
+        </section>
 
-    </body>
+        <section
+          id="panelInhalt"
+          role="tabpanel"
+          tabindex="0"
+          aria-labelledby="tabInhalt"
+          hidden
+          aria-hidden="true"
+        >
+          <p>Inhaltliche Beschreibung folgt. (Platzhalter)</p>
+        </section>
+      </div>
+
+      <!-- Buttons -->
+      <div class="buch-buttons">
+        <a href="index.html" class="zurueck-button">
+          ← Zurück zur Suche
+        </a>
+        <button class="ausleihe-button">Ausleihe anfragen</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Seitenfuß -->
+  <footer role="contentinfo">
+    <p>&copy; 2025 Fachbibliothek Chancengleichheit Sachsen</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="buch.js"></script>
+
+  <!-- Utility: screenreader-only -->
+  <style>
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+      clip: rect(0, 0, 0, 0);
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  </style>
+</body>
 </html>

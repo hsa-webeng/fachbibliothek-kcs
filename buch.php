@@ -4,9 +4,8 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 // Debug-Log (optional, für Entwicklung)
-file_put_contents(__DIR__ . '/buch_debug.log', date('Y-m-d H:i:s') . ' ' . print_r($_GET, true), FILE_APPEND);
+//file_put_contents(__DIR__ . '/buch_debug.log', date('Y-m-d H:i:s') . ' ' . print_r($_GET, true), FILE_APPEND);
 
-// establish connection
 try {
     $pdo = new PDO(
         'mysql:host=localhost;dbname=kcs_bibliothek;charset=utf8mb4',
@@ -19,14 +18,12 @@ try {
     exit;
 }
 
-// check if 'id' parameter is provided
 $id = $_GET['id'] ?? null;
 if(!$id){
     echo json_encode(['error' => 'Keine Buch-ID angegeben.']);
     exit;
 }
 
-// get the book details
 try {
     $stmt= $pdo->prepare("SELECT * FROM flat_books WHERE ENTRY_SHARED_ID = ?");
     $stmt->execute([$id]);

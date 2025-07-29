@@ -2,22 +2,24 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fachbibliothek</title>
   <link rel="stylesheet" href="style.css" />
-  <!--<script src="datenbank.js"></script>-->
   <script defer src="hochschule.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Quicksand:wght@700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-  <header>
+  <!-- Seitenkopf -->
+  <header role="banner">
     <div class="header-inner">
       <h1>Fachbibliothek</h1>
-      <p class="subline">Koodinierungsstelle Chancengleichheit Sachsen</p>
+      <p class="subline">Koordinierungsstelle Chancengleichheit Sachsen</p>
     </div>
   </header>
 
-  <main class="hochschule">
+  <!-- Hauptinhalt -->
+  <main class="hochschule" role="main">
     <section class="intro" aria-labelledby="welcome-heading">
       <h2 id="welcome-heading">Willkommen!</h2>
       <p>
@@ -26,92 +28,146 @@
       </p>
     </section>
 
-    <section class="suchbox">
-      <!-- Suchleiste + Button + Erweiterte Suche Button unter der Lupe -->
-      <form id="simpleSearchForm" class="suchbox-form" role="search">
+    <!-- Suchbereich -->
+    <section class="suchbox" aria-labelledby="search-heading">
+      <h2 id="search-heading" class="visually-hidden">Katalogsuche</h2>
+
+      <!-- Einfache Suche -->
+      <form
+        id="simpleSearchForm"
+        class="suchbox-form"
+        role="search"
+        aria-describedby="search-desc"
+      >
+        <p id="search-desc" class="visually-hidden">
+          Suche nach Autor, Titel oder ISBN.
+        </p>
+
         <div class="searchbar">
+          <label for="query" class="visually-hidden">Suchbegriff eingeben</label>
           <input
             type="text"
-            placeholder="Suche im Katalog nach Autor, Titel, ISBN ..."
-            aria-label="Suche"
+            id="query"
             name="query"
+            placeholder="Suche im Katalog nach Autor, Titel, ISBN …"
+            required
+            aria-required="true"
           />
-          <button type="submit" class="search-button" aria-label="Suche ausführen">
+          <button
+            type="submit"
+            class="search-button"
+            aria-label="Suche starten"
+          >
             🔍
           </button>
         </div>
-        
+
+        <!-- Umschalter zur erweiterten Suche -->
         <div class="button-wrapper">
-          <button type="button" class="advanced-toggle" id="toggleAdvancedButton">
+          <button
+            type="button"
+            class="advanced-toggle"
+            id="toggleAdvancedButton"
+            aria-expanded="false"
+            aria-controls="advancedSearch"
+          >
             Erweiterte Suche
           </button>
         </div>
-      </form>      
+      </form>
 
-<!-- Erweiterte Suche -->
-<div class="advanced-search" id="advancedSearch" hidden>
-  <form id="advancedForm" class="filter-form">
-    
-    <div class="form-row">
-      <div class="form-col">
-        <label for="autor">Autor</label>
-        <input type="text" id="autor" name="author" />
-      </div>
-      <div class="form-col">
-        <label for="titel">Titel</label>
-        <input type="text" id="titel" name="title" />
-      </div>
-    </div>
+      <!-- Erweiterte Suche -->
+      <section
+        id="advancedSearch"
+        class="advanced-search"
+        hidden
+        aria-labelledby="advanced-search-heading"
+      >
+        <h3 id="advanced-search-heading" class="visually-hidden">Erweiterte Suche</h3>
 
-    <div class="form-row">
-      <div class="form-col">
-        <label for="isbn">ISBN</label>
-        <input type="text" id="isbn" name="isbn" />
-      </div>
-      <div class="form-col">
-        <label for="verlag">Verlag</label>
-        <input type="text" id="verlag" name="publisher" />
-      </div>
-    </div>
+        <form id="advancedForm" class="filter-form">
+          <fieldset class="form-row">
+            <legend>Autor und Titel</legend>
+            <div class="form-col">
+              <label for="autor">Autor</label>
+              <input type="text" id="autor" name="author" />
+            </div>
+            <div class="form-col">
+              <label for="titel">Titel</label>
+              <input type="text" id="titel" name="title" />
+            </div>
+          </fieldset>
 
-    <div class="form-row genre-row">
-      <label>Genre</label>
-      <div class="checkbox-group">
-        <label class="checkbox-item">
-          <input type="checkbox" name="genre" value="belletristik" />
-          <span>Belletristik</span>
-        </label>
-        <label class="checkbox-item">
-          <input type="checkbox" name="genre" value="jugend" />
-          <span>Kinder- und Jugendliteratur</span>
-        </label>
-        <label class="checkbox-item">
-          <input type="checkbox" name="genre" value="sachliteratur" />
-          <span>Sachliteratur</span>
-        </label>
-      </div>
-    </div> 
+          <fieldset class="form-row">
+            <legend>ISBN und Verlag</legend>
+            <div class="form-col">
+              <label for="isbn">ISBN</label>
+              <input type="text" id="isbn" name="isbn" />
+            </div>
+            <div class="form-col">
+              <label for="verlag">Verlag</label>
+              <input type="text" id="verlag" name="publisher" />
+            </div>
+          </fieldset>
 
-    <div class="form-buttons">
-      <button type="submit">Suche starten</button>
-      <button type="reset" class="reset-button">Felder leeren</button>
-    </div>
-  </form>
-</div>
+          <fieldset class="form-row genre-row">
+            <legend>Genre auswählen</legend>
+            <div class="checkbox-group">
+              <label class="checkbox-item">
+                <input type="checkbox" name="genre" value="belletristik" />
+                <span>Belletristik</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="genre" value="jugend" />
+                <span>Kinder- und Jugendliteratur</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="genre" value="sachliteratur" />
+                <span>Sachliteratur</span>
+              </label>
+            </div>
+          </fieldset>
 
+          <div class="form-buttons">
+            <button type="submit">Suche starten</button>
+            <button type="reset" class="reset-button">Felder leeren</button>
+          </div>
+        </form>
+      </section>
+    </section>
 
-    <section class="ergebnisse" id="ergebnisse" aria-live="polite">
+    <!-- Suchergebnisse -->
+    <section
+      class="ergebnisse"
+      id="ergebnisse"
+      role="region"
+      aria-labelledby="results-heading"
+      aria-live="polite"
+    >
+      <h2 id="results-heading" class="visually-hidden">Suchergebnisse</h2>
       <div id="ergebnisContainer"></div>
     </section>
   </main>
 
-  <footer>
-    <p>
-      &copy; 2025 Fachbibliothek Chancengleichheit Sachsen |
-      <a href="#">Barrierefreiheit</a> |
-      <a href="#">Kontakt</a>
-    </p>
+  <!-- Seitenfuß -->
+  <footer role="contentinfo">
+    <p>&copy; 2025 Fachbibliothek Chancengleichheit Sachsen</p>
   </footer>
+
+  <!-- Utility-Klasse für Screenreader -->
+  <style>
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+      clip: rect(0, 0, 0, 0);
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  </style>
 </body>
 </html>
 
