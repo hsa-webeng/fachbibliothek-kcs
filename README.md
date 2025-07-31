@@ -22,6 +22,6 @@ XAMPP oder ein anderer Webserver mit:
 -        MySQL oder MariaDB
 ## Funktionalität
 Auf der Startseite können Stichworte in das Suchfeld eingegeben, oder mit der Erweiterten Suche spezifiziert werden. Daraufhin wird eine Ergebnisliste aus der Datenbank generiert, aus der das gewünschte Medium ausgewählt werden kann. Von dort wird der Nutzer zur Detailseite des Werkes weitergeleitet.
-Wenn das Medium verfügbar ist und der Nutzer aus „Ausleihen“ klickt, wird das KCS über E-Mail von dem Auftrag in Kenntnis gesetzt.
+Zukünftig soll es möglich sein, über einen "Ausleihen" Button, wenn das Medium verfügbar ist, das KCS über E-Mail von dem Auftrag in Kenntnis zu setzen.
 ### Credits
 Prototyp erstellt von Anna-Lena Hübl, Irmela Kaufmann, Tamara Loy und Tassia Hausmann, unter Betreuung von Joschi Kuphal und in Zusammenarbeit mit Miriam Grünz.
