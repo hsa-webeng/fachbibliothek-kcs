@@ -23,7 +23,7 @@ XAMPP oder ein anderer Webserver mit:
 ## Installation Datenbank
 - In phpMyAdmin legen sie eine neue Datenbank namens 'kcs-bibliothek’ an, (wenn der Name abweicht, müssen sie den Name der Datenbank in buch.php und search.php ändern)
 - setzen sie das CharSet utf8_bin
--Nachdem die Datenbank angelegt ist, importieren sie ‘kcs_bibliothek.sql’ in die Datenbank
+- Nachdem die Datenbank angelegt ist, importieren sie ‘kcs_bibliothek.sql’ in die Datenbank
 
 ## Funktionalität
 Auf der Startseite können Stichworte in das Suchfeld eingegeben, oder mit der Erweiterten Suche spezifiziert werden. Daraufhin wird eine Ergebnisliste aus der Datenbank generiert, aus der das gewünschte Medium ausgewählt werden kann. Von dort wird der Nutzer zur Detailseite des Werkes weitergeleitet.
