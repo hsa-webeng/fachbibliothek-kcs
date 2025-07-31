@@ -5,15 +5,14 @@ Zusammenarbeit der KCS mit Studierenden der Hochschule Ansbach.
 Das vorliegende Projekt ist der Prototyp einer barrierefreien Website, um die Ausleihe der Medien der Fachbibliothek zu vereinfachen und zugänglich zu machen.
 In der Entwicklung des Prototyps wurden HTML und CSS im Frontend und PHP und Javascript sowie SQL im Backend verwendet. Um die vorliegenden Daten aus der Citavi-Datenbank in MySQL einzubinden, wurde JabRef als Zwischeninstanz genutzt.
 ## Repository Inhalt
-buch.html
-buch.js
-buch.php
-buch_debug.log
-detail.css
-hochschule.js
-index.html
-kcs_bibliothek.sql
-search.php
+buch.html, 
+buch.js, 
+buch.php, 
+detail.css, 
+hochschule.js, 
+index.html, 
+kcs_bibliothek.sql, 
+search.php, 
 style.css
 ## Installation Vorraussetzungen
 XAMPP oder ein anderer Webserver mit:
@@ -21,9 +20,9 @@ XAMPP oder ein anderer Webserver mit:
 -        PHP (>= 7.4 empfohlen)
 -        MySQL oder MariaDB
 ## Installation Datenbank
-- In phpMyAdmin legen sie eine neue Datenbank namens 'kcs-bibliothek’ an, (wenn der Name abweicht, müssen sie den Name der Datenbank in buch.php und search.php ändern)
-- setzen sie das CharSet utf8_bin
-- Nachdem die Datenbank angelegt ist, importieren sie ‘kcs_bibliothek.sql’ in die Datenbank
+- In phpMyAdmin legen Sie eine neue Datenbank namens 'kcs-bibliothek’ an, (wenn der Name abweicht, müssen Sie den Name der Datenbank in buch.php und search.php ändern)
+- setzen Sie das CharSet utf8_bin
+- Nachdem die Datenbank angelegt ist, importieren Sie ‘kcs_bibliothek.sql’ in die Datenbank
 
 ## Funktionalität
 Auf der Startseite können Stichworte in das Suchfeld eingegeben, oder mit der Erweiterten Suche spezifiziert werden. Daraufhin wird eine Ergebnisliste aus der Datenbank generiert, aus der das gewünschte Medium ausgewählt werden kann. Von dort wird der Nutzer zur Detailseite des Werkes weitergeleitet.
