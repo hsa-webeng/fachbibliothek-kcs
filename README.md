@@ -10,9 +10,9 @@ buch.js
 buch.php
 buch_debug.log
 detail.css
-flat_books.sql 
 hochschule.js
 index.html
+kcs_bibliothek.sql
 search.php
 style.css
 ## Installation Vorraussetzungen
@@ -20,6 +20,11 @@ XAMPP oder ein anderer Webserver mit:
 -        Apache
 -        PHP (>= 7.4 empfohlen)
 -        MySQL oder MariaDB
+## Installation Datenbank
+- In phpMyAdmin legen sie eine neue Datenbank namens 'kcs-bibliothek’ an, (wenn der Name abweicht, müssen sie den Name der Datenbank in buch.php und search.php ändern)
+- setzen sie das CharSet utf8_bin
+-Nachdem die Datenbank angelegt ist, importieren sie ‘kcs_bibliothek.sql’ in die Datenbank
+
 ## Funktionalität
 Auf der Startseite können Stichworte in das Suchfeld eingegeben, oder mit der Erweiterten Suche spezifiziert werden. Daraufhin wird eine Ergebnisliste aus der Datenbank generiert, aus der das gewünschte Medium ausgewählt werden kann. Von dort wird der Nutzer zur Detailseite des Werkes weitergeleitet.
 Zukünftig soll es möglich sein, über einen "Ausleihen" Button, wenn das Medium verfügbar ist, das KCS über E-Mail von dem Auftrag in Kenntnis zu setzen.
